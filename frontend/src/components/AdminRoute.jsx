@@ -1,0 +1,45 @@
+import {
+  Navigate,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
+
+import { useAuth } from "../context/AuthContext";
+
+function AdminRoute() {
+  const {
+    isAuthenticated,
+    user,
+  } = useAuth();
+
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{
+          from: location.pathname,
+        }}
+      />
+    );
+  }
+
+  const isAdmin =
+    user?.is_staff === true ||
+    user?.is_superuser === true;
+
+  if (!isAdmin) {
+    return (
+      <Navigate
+        to="/"
+        replace
+      />
+    );
+  }
+
+  return <Outlet />;
+}
+
+export default AdminRoute;
