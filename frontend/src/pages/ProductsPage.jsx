@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import ProductCard from "../Components/ProductCard";
-import ProductGridSkeleton from "../Components/ProductGridSkeleton";
+import ProductCard from "../components/ProductCard";
+import ProductGridSkeleton from "../components/ProductGridSkeleton";
 
 import {
   getProducts,

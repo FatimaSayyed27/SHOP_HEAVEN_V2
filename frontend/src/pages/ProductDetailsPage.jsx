@@ -13,8 +13,7 @@ import {
 
 import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
-
-import ProductCard from "../Components/ProductCard";
+import ProductCard from "../components/ProductCard";
 import ProductDetailsSkeleton from "../components/ProductDetailsSkeleton";
 
 function ProductDetailsPage() {
