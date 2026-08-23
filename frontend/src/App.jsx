@@ -10,9 +10,9 @@ import {
 // =====================================================
 
 import Navbar from "./components/Navbar";
-import HeroSection from "./Components/HeroSection";
+import HeroSection from "./components/HeroSection";
 import BrandSection from "./components/BrandSection";
-import ProductGrid from "./Components/ProductGrid";
+import ProductGrid from "./components/ProductGrid";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
