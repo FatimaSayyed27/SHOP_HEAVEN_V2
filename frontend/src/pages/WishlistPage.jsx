@@ -303,13 +303,13 @@ function WishlistPage() {
 
                     <div className="relative aspect-[0.82] bg-[#efebe5] overflow-hidden rounded-[2px]">
 
-                      {item.product_image ? (
-                        <img
-                          src={`${BASEURL}${item.product_image}`}
-                          alt={item.product_name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
-                        />
-                      ) : (
+                     {item.product_image ? (
+  <img
+    src={getImageUrl(item.product_image)}
+    alt={item.product_name}
+    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+  />
+) : (
                         <div className="w-full h-full flex items-center justify-center text-sm text-[#9a9288]">
                           No image
                         </div>

@@ -172,13 +172,13 @@ function ProductGrid() {
                         to={`/products/${product.id}`}
                         className="block w-full h-full"
                       >
-                        {product.image ? (
-                          <img
-                            src={`${BASEURL}${product.image}`}
-                            alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-[1.035] transition duration-700 ease-out"
-                          />
-                        ) : (
+                     {product.image ? (
+  <img
+    src={getImageUrl(product.image)}
+    alt={product.name}
+    className="w-full h-full object-cover group-hover:scale-[1.035] transition duration-700 ease-out"
+  />
+) : (
                           <div className="w-full h-full flex items-center justify-center text-gray-400">
                             No image
                           </div>

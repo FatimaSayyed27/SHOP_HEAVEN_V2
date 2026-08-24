@@ -19,10 +19,10 @@ function BrandAmbassadorSection({ brand }) {
     brand?.ambassador_image_3,
     brand?.ambassador_image_4,
   ]
-    .filter(Boolean)
-    .map((image) => ({
-      image: `${BASEURL}${image}`,
-    }));
+   .filter(Boolean)
+.map((image) => ({
+  image: getImageUrl(image),
+}));
 
   // =====================================================
   // UPDATE PAGE NUMBER ON SCROLL

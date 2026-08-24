@@ -778,14 +778,13 @@ function AdminProductsPage() {
                       <td className="px-5 py-5">
 
                         <div className="flex items-center gap-4 min-w-[250px]">
-
-                          {product.image ? (
-                            <img
-                              src={`${BASEURL}${product.image}`}
-                              alt={product.name}
-                              className="w-16 h-20 object-cover rounded-xl bg-[#efebe5]"
-                            />
-                          ) : (
+{product.image ? (
+  <img
+    src={getImageUrl(product.image)}
+    alt={product.name}
+    className="w-16 h-20 object-cover rounded-xl bg-[#efebe5]"
+  />
+) : (
                             <div className="w-16 h-20 rounded-xl bg-[#efebe5] flex items-center justify-center text-[10px] text-[#9a9288]">
                               No Image
                             </div>

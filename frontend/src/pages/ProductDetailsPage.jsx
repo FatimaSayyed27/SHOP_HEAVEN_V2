@@ -267,13 +267,13 @@ return (
         {/* IMAGE */}
         <div className="bg-white rounded-3xl overflow-hidden">
           <div className="aspect-square bg-gray-100">
-            {product.image ? (
-              <img
-                src={`${BASEURL}${product.image}`}
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            ) : (
+          {product.image ? (
+  <img
+    src={getImageUrl(product.image)}
+    alt={product.name}
+    className="w-full h-full object-cover"
+  />
+) : (
               <div className="w-full h-full flex items-center justify-center text-gray-400">
                 No image
               </div>

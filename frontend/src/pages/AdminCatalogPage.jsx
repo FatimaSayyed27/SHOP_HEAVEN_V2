@@ -1108,14 +1108,13 @@ function AdminCatalogPage() {
                       <div className="flex items-center gap-4 min-w-0">
 
                         <div className="w-14 h-14 shrink-0 rounded-xl bg-[#f8f6f2] border border-[#e1dad1] overflow-hidden flex items-center justify-center">
-
-                          {brand.logo ? (
-                            <img
-                              src={`${BASEURL}${brand.logo}`}
-                              alt={brand.name}
-                              className="w-full h-full object-contain p-2"
-                            />
-                          ) : (
+{brand.logo ? (
+  <img
+    src={getImageUrl(brand.logo)}
+    alt={brand.name}
+    className="w-full h-full object-contain p-2"
+  />
+) : (
                             <span className="font-serif text-xl">
                               {brand.name
                                 .charAt(

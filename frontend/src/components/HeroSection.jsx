@@ -92,18 +92,18 @@ function HeroSection() {
 
             <div className="relative aspect-[4/4.2] rounded-[28px] overflow-hidden bg-[#ddd8d0]">
 
-              {loading ? (
-                <div className="w-full h-full animate-pulse bg-[#ddd8d0]" />
-              ) : heroProduct?.image ? (
-                <img
-                  src={`${BASEURL}${heroProduct.image}`}
-                  alt={
-                    heroProduct.name ||
-                    "Shop Haven Collection"
-                  }
-                  className="w-full h-full object-cover"
-                />
-              ) : (
+             {loading ? (
+  <div className="w-full h-full animate-pulse bg-[#ddd8d0]" />
+) : heroProduct?.image ? (
+  <img
+    src={getImageUrl(heroProduct.image)}
+    alt={
+      heroProduct.name ||
+      "Shop Haven Collection"
+    }
+    className="w-full h-full object-cover"
+  />
+) : (
                 <div className="w-full h-full flex items-center justify-center text-[#8f897f]">
                   No collection image
                 </div>

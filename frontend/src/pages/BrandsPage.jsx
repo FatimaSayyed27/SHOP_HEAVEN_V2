@@ -197,13 +197,13 @@ function BrandsPage() {
                     {/* Logo */}
                     <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-full border border-[#e7e0d6] flex items-center justify-center overflow-hidden bg-white group-hover:border-[#c8bba9] transition duration-500">
 
-                      {brand.logo ? (
-                        <img
-                          src={`${BASEURL}${brand.logo}`}
-                          alt={`${brand.name} logo`}
-                          className="w-full h-full object-contain p-4 sm:p-5 transition-transform duration-700 group-hover:scale-105"
-                        />
-                      ) : (
+                   {brand.logo ? (
+  <img
+    src={getImageUrl(brand.logo)}
+    alt={`${brand.name} logo`}
+    className="w-full h-full object-contain p-4 sm:p-5 transition-transform duration-700 group-hover:scale-105"
+  />
+) : (
                         <span className="font-serif text-3xl text-[#1c1a18]">
                           {brand.name
                             .charAt(0)

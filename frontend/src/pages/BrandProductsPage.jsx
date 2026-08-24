@@ -448,11 +448,11 @@ function BrandProductsPage() {
               {brand?.logo && (
                 <div className="mx-auto mt-8 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-white border border-[#ded6ca] flex items-center justify-center overflow-hidden shadow-[0_8px_25px_rgba(0,0,0,0.04)]">
 
-                  <img
-                    src={`${BASEURL}${brand.logo}`}
-                    alt={`${brand.name} logo`}
-                    className="w-full h-full object-contain p-5"
-                  />
+             <img
+  src={getImageUrl(brand.logo)}
+  alt={`${brand.name} logo`}
+  className="w-full h-full object-contain p-5"
+/>
 
                 </div>
               )}

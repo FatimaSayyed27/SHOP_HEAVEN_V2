@@ -229,13 +229,13 @@ return (
                     {/* IMAGE */}
                     <div className="shrink-0">
 
-                      {item.product_image ? (
-                        <img
-                          src={`${BASEURL}${item.product_image}`}
-                          alt={item.product_name}
-                          className="w-24 h-28 sm:w-28 sm:h-32 object-cover rounded-xl bg-[#efebe5]"
-                        />
-                      ) : (
+                     {item.product_image ? (
+  <img
+    src={getImageUrl(item.product_image)}
+    alt={item.product_name}
+    className="w-24 h-28 sm:w-28 sm:h-32 object-cover rounded-xl bg-[#efebe5]"
+  />
+) : (
                         <div className="w-24 h-28 sm:w-28 sm:h-32 rounded-xl bg-[#efebe5] flex items-center justify-center text-xs text-[#9a9288]">
                           No image
                         </div>

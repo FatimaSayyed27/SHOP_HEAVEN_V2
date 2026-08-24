@@ -166,13 +166,13 @@ function BrandSection() {
                           {/* Logo */}
                           <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 rounded-full bg-white border border-[#e4ddd3] flex items-center justify-center overflow-hidden shadow-[0_8px_25px_rgba(0,0,0,0.035)] group-hover:-translate-y-1 group-hover:shadow-[0_14px_35px_rgba(0,0,0,0.08)] transition duration-300">
 
-                            {brand.logo ? (
-                              <img
-                                src={`${BASEURL}${brand.logo}`}
-                                alt={brand.name}
-                                className="w-full h-full object-contain p-5"
-                              />
-                            ) : (
+                        {brand.logo ? (
+  <img
+    src={getImageUrl(brand.logo)}
+    alt={brand.name}
+    className="w-full h-full object-contain p-5"
+  />
+) : (
                               <span className="font-serif text-3xl text-[#24211e]">
                                 {brand.name
                                   .charAt(0)
