@@ -4,29 +4,31 @@ from .models import Brand, Category, Product, Cart, CartItem, Wishlist, Wishlist
 from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer
 )
+import cloudinary.utils
 
+class CloudinaryImageField(serializers.ImageField):
+    def to_representation(self, value):
+        if not value:
+            return None
 
-class MyTokenObtainPairSerializer(
-    TokenObtainPairSerializer
-):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
+        name = getattr(value, "name", value)
 
-        token["username"] = user.username
-        token["is_staff"] = user.is_staff
-        token["is_superuser"] = user.is_superuser
+        if not name:
+            return None
 
-        return token
+        name = str(name)
 
-    def validate(self, attrs):
-        data = super().validate(attrs)
+        # Already a complete URL
+        if name.startswith("http://") or name.startswith("https://"):
+            return name
 
-        data["username"] = self.user.username
-        data["is_staff"] = self.user.is_staff
-        data["is_superuser"] = self.user.is_superuser
+        url, _ = cloudinary.utils.cloudinary_url(
+            name,
+            secure=True,
+        )
 
-        return data
+        return url
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -56,6 +58,31 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 class BrandSerializer(serializers.ModelSerializer):
+    logo = CloudinaryImageField(required=False, allow_null=True)
+    hero_image = CloudinaryImageField(required=False, allow_null=True)
+    ambassador_image = CloudinaryImageField(required=False, allow_null=True)
+    ambassador_image_1 = CloudinaryImageField(required=False, allow_null=True)
+    ambassador_image_2 = CloudinaryImageField(required=False, allow_null=True)
+    ambassador_image_3 = CloudinaryImageField(required=False, allow_null=True)
+    ambassador_image_4 = CloudinaryImageField(required=False, allow_null=True)
+
+    class Meta:
+        model = Brand
+        fields = [
+            "id",
+            "name",
+            "slug",
+            "description",
+            "logo",
+            "hero_image",
+            "ambassador_image",
+            "ambassador_name",
+            "ambassador_description",
+            "ambassador_image_1",
+            "ambassador_image_2",
+            "ambassador_image_3",
+            "ambassador_image_4",
+        ]
     class Meta:
         model = Brand
       
@@ -76,7 +103,6 @@ class BrandSerializer(serializers.ModelSerializer):
 ]
         
 
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -84,6 +110,24 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    brand = BrandSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
+    image = CloudinaryImageField(required=False, allow_null=True)
+
+    class Meta:
+        model = Product
+        fields = [
+            "id",
+            "name",
+            "description",
+            "price",
+            "image",
+            "stock",
+            "is_featured",
+            "brand",
+            "category",
+            "created_at",
+        ]
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
 
@@ -103,10 +147,10 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
 class CartItemSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(
-        source="product.name",
-        read_only=True
-    )
+    product_image = CloudinaryImageField(
+    source="product.image",
+    read_only=True
+)
     product_price = serializers.DecimalField(
         source="product.price",
         max_digits=10,
@@ -151,11 +195,10 @@ class CartSerializer(serializers.ModelSerializer):
         return obj.total
 
 class WishlistItemSerializer(serializers.ModelSerializer):
-    product_name = serializers.CharField(
-        source="product.name",
-        read_only=True
-    )
-
+    product_image = CloudinaryImageField(
+    source="product.image",
+    read_only=True
+)
     product_price = serializers.DecimalField(
         source="product.price",
         max_digits=10,
@@ -335,28 +378,62 @@ class AdminProductSerializer(serializers.ModelSerializer):
             "category_name",
             "created_at",
         ]
+    brand_name = serializers.CharField(
+        source="brand.name",
+        read_only=True
+    )
+
+    category_name = serializers.CharField(
+        source="category.name",
+        read_only=True
+    )
+
+    class Meta:
+        model = Product
+        fields = [
+            "id",
+            "name",
+            "description",
+            "price",
+            "stock",
+            "image",
+            "brand",
+            "brand_name",
+            "category",
+            "category_name",
+            "is_featured",
+            "created_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "brand_name",
+            "category_name",
+            "created_at",
+        ]
 
 class AdminBrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = [
-    "id",
-    "name",
-    "slug",
-    "description",
-    "hero_image",
-    "ambassador_image",
-    "ambassador_name",
-    "ambassador_description",
-    "ambassador_image_1",
-    "ambassador_image_2",
-    "ambassador_image_3",
-    "ambassador_image_4",
-]
+            "id",
+            "name",
+            "slug",
+            "description",
+            "logo",
+            "hero_image",
+            "ambassador_image",
+            "ambassador_name",
+            "ambassador_description",
+            "ambassador_image_1",
+            "ambassador_image_2",
+            "ambassador_image_3",
+            "ambassador_image_4",
+        ]
+
         read_only_fields = [
             "id",
         ]
-
 
 class AdminCategorySerializer(serializers.ModelSerializer):
     class Meta:
