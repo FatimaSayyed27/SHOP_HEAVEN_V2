@@ -12,6 +12,8 @@ import {
 import { useWishlist } from "../context/WishlistContext";
 import ProductGridSkeleton from "./ProductGridSkeleton";
 
+import getImageUrl from "../utils/imageUrl";
+
 function ProductGrid() {
   const [products, setProducts] = useState([]);
   const [wishlistedItems, setWishlistedItems] = useState({});
