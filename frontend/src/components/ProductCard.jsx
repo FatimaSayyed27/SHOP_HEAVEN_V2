@@ -184,14 +184,18 @@ function ProductCard({ product }) {
           to={`/products/${product.id}`}
           className="block w-full h-full"
         >
-          {product.image ? (
-            <img
-              src={`${BASEURL}${product.image}`}
-              alt={product.name}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-            />
-          ) : (
+{product.image ? (
+  <img
+    src={
+      product.image.startsWith("http")
+        ? product.image
+        : `${BASEURL}${product.image}`
+    }
+    alt={product.name}
+    loading="lazy"
+    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+  />
+) : (
             <div className="w-full h-full flex items-center justify-center text-sm text-[#999188]">
               No image
             </div>
