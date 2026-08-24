@@ -5,6 +5,8 @@ import { getProductById, getProducts } from "../services/productService";
 
 import { addToCart } from "../services/cartService";
 
+import getImageUrl from "../utils/imageUrl";
+
 import {
   getWishlist,
   addToWishlist,

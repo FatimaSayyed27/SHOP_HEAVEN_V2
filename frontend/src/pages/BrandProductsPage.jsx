@@ -11,6 +11,8 @@ import {
   getProducts,
 } from "../services/productService";
 
+import getImageUrl from "../utils/imageUrl";
+
 import ProductCard from "../components/ProductCard";
 import ProductGridSkeleton from "../components/ProductGridSkeleton";
 import BrandAmbassadorSection from "../components/BrandAmbassadorSection";

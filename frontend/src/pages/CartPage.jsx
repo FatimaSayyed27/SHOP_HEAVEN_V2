@@ -7,6 +7,8 @@ import {
   removeCartItem,
 } from "../services/cartService";
 
+import getImageUrl from "../utils/imageUrl";
+
 import { useCart } from "../context/CartContext";
 
 function CartPage() {

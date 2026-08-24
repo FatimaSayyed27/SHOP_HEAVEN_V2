@@ -12,6 +12,8 @@ import {
   getCategories,
 } from "../services/productService";
 
+import getImageUrl from "../utils/imageUrl";
+
 function AdminProductsPage() {
   const [products, setProducts] = useState([]);
   const [brands, setBrands] = useState([]);

@@ -9,6 +9,8 @@ import {
 
 import { useWishlist } from "../context/WishlistContext";
 
+import getImageUrl from "../utils/imageUrl";
+
 function ProductCard({ product }) {
   const BASEURL =
     import.meta.env.VITE_DJANGO_BASE_URL;
@@ -186,11 +188,8 @@ function ProductCard({ product }) {
         >
 {product.image ? (
   <img
-    src={
-      product.image.startsWith("http")
-        ? product.image
-        : `${BASEURL}${product.image}`
-    }
+    src={getImageUrl(product.image)}
+    
     alt={product.name}
     loading="lazy"
     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"

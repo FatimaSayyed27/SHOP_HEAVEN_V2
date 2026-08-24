@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import getImageUrl from "../utils/imageUrl";
 
 function BrandAmbassadorSection({ brand }) {
   const BASEURL =

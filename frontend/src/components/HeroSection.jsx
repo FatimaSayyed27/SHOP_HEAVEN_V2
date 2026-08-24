@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import getImageUrl from "../utils/imageUrl";
+
 import { getFeaturedProducts } from "../services/productService";
+
+
 
 function HeroSection() {
   const [heroProduct, setHeroProduct] = useState(null);

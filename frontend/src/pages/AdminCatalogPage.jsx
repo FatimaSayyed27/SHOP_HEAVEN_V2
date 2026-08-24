@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import getImageUrl from "../utils/imageUrl";
+
 import {
   getAdminBrands,
   createAdminBrand,

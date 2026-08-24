@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { getBrands } from "../services/productService";
 
+import getImageUrl from "../utils/imageUrl";
+
 function BrandsPage() {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] =
