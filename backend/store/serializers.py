@@ -18,17 +18,17 @@ class CloudinaryImageField(serializers.ImageField):
 
         name = str(name)
 
-        # Already a complete URL
         if name.startswith("http://") or name.startswith("https://"):
             return name
 
         url, _ = cloudinary.utils.cloudinary_url(
             name,
             secure=True,
+            resource_type="image",
+            type="upload",
         )
 
         return url
-
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -58,6 +58,58 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 class BrandSerializer(serializers.ModelSerializer):
+    logo = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    hero_image = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    ambassador_image = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    ambassador_image_1 = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    ambassador_image_2 = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    ambassador_image_3 = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    ambassador_image_4 = CloudinaryImageField(
+        required=False,
+        allow_null=True
+    )
+
+    class Meta:
+        model = Brand
+        fields = [
+            "id",
+            "name",
+            "slug",
+            "description",
+            "logo",
+            "hero_image",
+            "ambassador_image",
+            "ambassador_name",
+            "ambassador_description",
+            "ambassador_image_1",
+            "ambassador_image_2",
+            "ambassador_image_3",
+            "ambassador_image_4",
+        ]
     logo = CloudinaryImageField(required=False, allow_null=True)
     hero_image = CloudinaryImageField(required=False, allow_null=True)
     ambassador_image = CloudinaryImageField(required=False, allow_null=True)
@@ -130,6 +182,24 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
     brand = BrandSerializer(read_only=True)
     category = CategorySerializer(read_only=True)
+    image = CloudinaryImageField(required=False, allow_null=True)
+
+    class Meta:
+        model = Product
+        fields = [
+            "id",
+            "name",
+            "description",
+            "price",
+            "image",
+            "stock",
+            "is_featured",
+            "brand",
+            "category",
+            "created_at",
+        ]
+    brand = BrandSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
 
     class Meta:
         model = Product
@@ -147,6 +217,39 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
 
 class CartItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(
+        source="product.name",
+        read_only=True
+    )
+
+    product_price = serializers.DecimalField(
+        source="product.price",
+        max_digits=10,
+        decimal_places=2,
+        read_only=True
+    )
+
+    product_image = CloudinaryImageField(
+        source="product.image",
+        read_only=True
+    )
+
+    subtotal = serializers.SerializerMethodField()
+
+    class Meta:
+        model = CartItem
+        fields = [
+            "id",
+            "product",
+            "product_name",
+            "product_price",
+            "product_image",
+            "quantity",
+            "subtotal",
+        ]
+
+    def get_subtotal(self, obj):
+        return obj.subtotal
     product_image = CloudinaryImageField(
     source="product.image",
     read_only=True
@@ -195,6 +298,32 @@ class CartSerializer(serializers.ModelSerializer):
         return obj.total
 
 class WishlistItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(
+        source="product.name",
+        read_only=True
+    )
+
+    product_price = serializers.DecimalField(
+        source="product.price",
+        max_digits=10,
+        decimal_places=2,
+        read_only=True
+    )
+
+    product_image = CloudinaryImageField(
+        source="product.image",
+        read_only=True
+    )
+
+    class Meta:
+        model = WishlistItem
+        fields = [
+            "id",
+            "product",
+            "product_name",
+            "product_price",
+            "product_image",
+        ]
     product_image = CloudinaryImageField(
     source="product.image",
     read_only=True
