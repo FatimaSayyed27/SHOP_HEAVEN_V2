@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function ScrollToTop() {
-  const { pathname, search } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo({
@@ -10,7 +10,7 @@ function ScrollToTop() {
       left: 0,
       behavior: "auto",
     });
-  }, [pathname, search]);
+  }, [pathname]);
 
   return null;
 }
