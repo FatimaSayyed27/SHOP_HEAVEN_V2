@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shop-heaven-v2-eta.vercel.app/sitemap.xml
