@@ -8,6 +8,8 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 
+from urllib.parse import urlparse, parse_qsl
+
 
 # =========================================================
 # LOAD ENVIRONMENT VARIABLES
@@ -132,20 +134,46 @@ WSGI_APPLICATION = "config.wsgi.application"
 # DATABASE
 # =========================================================
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.getenv("DB_NAME"),
+#         "USER": os.getenv("DB_USER"),
+#         "PASSWORD": os.getenv("DB_PASSWORD"),
+#         "HOST": os.getenv(
+#             "DB_HOST",
+#             "localhost"
+#         ),
+#         "PORT": os.getenv(
+#             "DB_PORT",
+#             "5432"
+#         ),
+#         "OPTIONS": {
+#             "sslmode": "require",   
+#         }
+#     }
+# }
+
+# =========================================================
+# DATABASE - NEON POSTGRESQL
+# =========================================================
+
+DATABASE_URL = os.getenv("DB_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is missing from .env")
+
+tmpPostgres = urlparse(DATABASE_URL)
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv(
-            "DB_HOST",
-            "localhost"
-        ),
-        "PORT": os.getenv(
-            "DB_PORT",
-            "5432"
-        ),
+        "NAME": tmpPostgres.path.lstrip("/"),
+        "USER": tmpPostgres.username,
+        "PASSWORD": tmpPostgres.password,
+        "HOST": tmpPostgres.hostname,
+        "PORT": tmpPostgres.port or 5432,
+        "OPTIONS": dict(parse_qsl(tmpPostgres.query)),
     }
 }
 
